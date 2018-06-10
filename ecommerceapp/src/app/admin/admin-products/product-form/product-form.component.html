@@ -1,0 +1,30 @@
+<form #f="ngForm">
+
+  <div class="form-group">
+    <label>Title</label>
+    <input class="form-control" ngModel name="title" #title="ngModel">
+  </div>
+
+  <div class="form-group">
+    <label>Cost</label>
+    <input class="form-control" ngModel name="cost" #cost="ngModel">
+  </div>
+
+  <div class="form-group">
+    <label>Category</label>
+    {{items | async}}
+    <select class="form-control" ngModel name="category">
+      <option *ngFor="let x of items | async" [value]="x.name">Select Category</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Image url</label>
+    <input class="form-control" ngModel name="image" #image="ngModel">
+  </div>
+
+  <div class="form-group">
+  <button class="btn btn-primary" (click)="saveProduct()">Save</button>    
+  </div>
+
+</form>
