@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
@@ -15,7 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule, Route } from '@angular/router';
 import { OrderSucessComponent } from './order-sucess/order-sucess.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-
+import {HttpModule} from '@angular/http';
 //firebase start
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
@@ -24,6 +24,8 @@ import {AngularFirestoreModule} from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment.prod';
 import { ProductFormComponent } from './admin/admin-products/product-form/product-form.component';
+import { ProductService } from './providers/product.service';
+import {DataTableModule} from "angular-6-datatable";
 //firebase end
 @NgModule({
   declarations: [
@@ -43,7 +45,10 @@ import { ProductFormComponent } from './admin/admin-products/product-form/produc
   ],
   imports: [
     BrowserModule,
+    DataTableModule,
+    HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     AngularFirestoreModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([{ path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -53,14 +58,17 @@ import { ProductFormComponent } from './admin/admin-products/product-form/produc
     { path: 'checkout', component: CheckOutComponent },
     { path: 'order-success', component: OrderSucessComponent },
     { path: 'my-orders', component: MyOrdersComponent },
-    { path: 'admin/products', component: AdminProductsComponent },
+    
+    { path: 'admin/products/edit/:id', component: ProductFormComponent },
     { path: 'admin/products/new', component: ProductFormComponent },
+    { path: 'admin/products', component: AdminProductsComponent },
+    
     { path: 'admin/admin-orders', component: AdminOrderComponent },
     { path: 'login', component: LoginComponent }]),
-    AngularFireModule.initializeApp(environment.firebase ,'ecommerce'),
+    AngularFireModule.initializeApp(environment.firebase ,'bshop'),
     AngularFireAuthModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
