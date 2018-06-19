@@ -26,6 +26,7 @@ import { environment } from '../environments/environment.prod';
 import { ProductFormComponent } from './admin/admin-products/product-form/product-form.component';
 import { ProductService } from './providers/product.service';
 import {DataTableModule} from "angular-6-datatable";
+import { CategoryService } from './providers/category.service';
 //firebase end
 @NgModule({
   declarations: [
@@ -58,7 +59,6 @@ import {DataTableModule} from "angular-6-datatable";
     { path: 'checkout', component: CheckOutComponent },
     { path: 'order-success', component: OrderSucessComponent },
     { path: 'my-orders', component: MyOrdersComponent },
-    
     { path: 'admin/products/edit/:id', component: ProductFormComponent },
     { path: 'admin/products/new', component: ProductFormComponent },
     { path: 'admin/products', component: AdminProductsComponent },
@@ -68,7 +68,7 @@ import {DataTableModule} from "angular-6-datatable";
     AngularFireModule.initializeApp(environment.firebase ,'bshop'),
     AngularFireAuthModule
   ],
-  providers: [ProductService],
+  providers: [ProductService,CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
