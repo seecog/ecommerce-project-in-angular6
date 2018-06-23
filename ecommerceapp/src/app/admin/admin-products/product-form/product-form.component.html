@@ -21,11 +21,9 @@
       <div class="form-group">
         <label>Category</label>
         <select class="form-control" formControlName="category">
-          <option value="northIndian">North Indian</option>
-          <option value="southIndian">South Indian</option>
-          <option value="0">Biryani</option>
-          <option value="0">Breads</option>
-          <option value="0">Chineese</option>
+          <option *ngFor="let x of categories" [value]="x.key">
+            {{x.data.name}}
+          </option>
         </select>
         <p *ngIf="frm.get('category').errors && frm.get('category').touched">
           <span *ngIf="frm.get('category').errors['required']" style="color:red;">Category required</span>

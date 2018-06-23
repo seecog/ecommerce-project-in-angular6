@@ -34,6 +34,7 @@ this.frm = new FormGroup({
   }
 
   ngOnInit() {
+    this.getCategories();
     this.routeParam.params.subscribe((param)=>{
       console.log('The key is ',param['id']);
       
@@ -99,6 +100,23 @@ updateProduct(){
           }
         )
       }
+      }
+
+
+      getCategories() {
+        this.http.get('https://bshop-4d7cd.firebaseio.com/categories.json').subscribe(
+          (res) => {
+            console.log('Record fetched ', res.json())
+            let jsonRecord = res.json();
+            let keys = Object.keys(jsonRecord);
+            this.categories = keys.map(function (key) {
+              return { key: key, data: jsonRecord[key] };
+            })
+          },
+          (error) => {
+            console.log("Record updated")
+          }
+        )
       }
 
 }

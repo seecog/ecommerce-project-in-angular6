@@ -1,0 +1,5 @@
+<div  class="list-group">
+    <a class="list-group-item" *ngFor="let cat of categories" routerLink="/" [queryParams]="{category : cat.key}">
+      {{cat.data.name}}
+    </a>
+  </div>

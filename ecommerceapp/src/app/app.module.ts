@@ -26,6 +26,7 @@ import { environment } from '../environments/environment.prod';
 import { ProductFormComponent } from './admin/admin-products/product-form/product-form.component';
 import { ProductService } from './providers/product.service';
 import {DataTableModule} from "angular-6-datatable";
+import { CategoryListComponent } from './products/category-list/category-list.component';
 //firebase end
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {DataTableModule} from "angular-6-datatable";
     LoginComponent,
     OrderSucessComponent,
     NavBarComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    CategoryListComponent
   ],
   imports: [
     BrowserModule,
@@ -50,10 +52,13 @@ import {DataTableModule} from "angular-6-datatable";
     FormsModule,
     ReactiveFormsModule,
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot([{ path: '', redirectTo: '/home', pathMatch: 'full' },
+    RouterModule.forRoot(
+      [
+        
     { path: 'home', component: HomeComponent },
-    { path: 'products', component: ProductsComponent },
+    { path: '', component: ProductsComponent },
     { path: 'shopping-cart', component: ShoppingCartComponent },
     { path: 'checkout', component: CheckOutComponent },
     { path: 'order-success', component: OrderSucessComponent },
