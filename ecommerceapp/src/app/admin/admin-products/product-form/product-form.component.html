@@ -1,62 +1,64 @@
 <div class="row">
-<div class="col-lg-6">
-<form [formGroup]="frm">
+  <div class="col-lg-6">
+    <form [formGroup]="frm">
 
-  <div class="form-group">
-    <label>Title</label>
-    <input class="form-control" formControlName="title">
-    <p *ngIf="frm.get('title').errors && frm.get('title').touched">
-<span *ngIf="frm.get('title').errors['required']" style="color:red;">Title required</span>
-    </p>
+      <div class="form-group">
+        <label>Title</label>
+        <input class="form-control" formControlName="title">
+        <p *ngIf="frm.get('title').errors && frm.get('title').touched">
+          <span *ngIf="frm.get('title').errors['required']" style="color:red;">Title required</span>
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label>Cost</label>
+        <input class="form-control" formControlName="cost">
+        <p *ngIf="frm.get('cost').errors && frm.get('cost').touched">
+          <span *ngIf="frm.get('cost').errors['required']" style="color:red;">Cost required</span>
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label>Category</label>
+        <select class="form-control" formControlName="category">
+          <option value="northIndian">North Indian</option>
+          <option value="southIndian">South Indian</option>
+          <option value="0">Biryani</option>
+          <option value="0">Breads</option>
+          <option value="0">Chineese</option>
+        </select>
+        <p *ngIf="frm.get('category').errors && frm.get('category').touched">
+          <span *ngIf="frm.get('category').errors['required']" style="color:red;">Category required</span>
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label>Image url</label>
+        <input class="form-control" formControlName="url">
+        <p *ngIf="frm.get('url').errors && frm.get('url').touched">
+          <span *ngIf="frm.get('url').errors['required']" style="color:red;">Image url required</span>
+        </p>
+      </div>
+
+      <div class="form-group">
+        <button *ngIf="btn_stt" class="btn btn-primary" (click)="saveProduct()">Save</button>
+        <button *ngIf="!btn_stt" class="btn btn-primary" (click)="updateProduct()">Update</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button *ngIf="!btn_stt" class="btn btn-danger" (click)="deleteProduct()">Delete</button>
+
+      </div>
+
+    </form>
   </div>
-
-  <div class="form-group">
-    <label>Cost</label>
-    <input class="form-control"  formControlName="cost">
-    <p *ngIf="frm.get('cost').errors && frm.get('cost').touched">
-      <span *ngIf="frm.get('cost').errors['required']" style="color:red;">Cost required</span>
-          </p>
-  </div>
-
-  <div class="form-group">
-    <label>Category</label>
-    <select class="form-control" formControlName="category">
-      <option value="northIndian">North Indian</option>
-      <option value="southIndian">South Indian</option>
-      <option value="0">Biryani</option>
-      <option value="0">Breads</option>
-      <option value="0">Chineese</option>
-    </select>
-    <p *ngIf="frm.get('category').errors && frm.get('category').touched">
-      <span *ngIf="frm.get('category').errors['required']" style="color:red;">Category required</span>
-          </p>
-  </div>
-
-  <div class="form-group">
-    <label>Image url</label>
-    <input class="form-control" formControlName="url">
-    <p *ngIf="frm.get('url').errors && frm.get('url').touched">
-      <span *ngIf="frm.get('url').errors['required']" style="color:red;">Image url required</span>
-          </p>
-  </div>
-
-  <div class="form-group">
-  <button *ngIf="btn_stt" class="btn btn-primary" (click)="saveProduct()">Save</button>    
-  <button *ngIf="!btn_stt" class="btn btn-primary" (click)="updateProduct()">Update</button>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
-  <button *ngIf="!btn_stt" class="btn btn-danger" (click)="deleteProduct()">Delete</button>    
-    
-</div>
-
-</form>
-</div>
-<div class="col-lg-6">
-  <div class="card">
-    <img class="card-img-top" src="{{frm.get('url').value}}">
-    <div class="card-body">
-      <h5 class="card-title">{{frm.get('title').value}}</h5>
-      <p class="card-text">{{frm.get('cost').value | currency : 'USD'}}</p>
-      <span  class="label label-success"><i>{{frm.get('category').value}}</i></span>
+  <div class="col-lg-6">
+    <div class="card">
+      <img class="card-img-top" src="{{frm.get('url').value}}">
+      <div class="card-body">
+        <h5 class="card-title">{{frm.get('title').value}}</h5>
+        <p class="card-text">{{frm.get('cost').value | currency : 'USD'}}</p>
+        <span class="label label-success">
+          <i>{{frm.get('category').value}}</i>
+        </span>
+      </div>
     </div>
   </div>
-</div>
 </div>

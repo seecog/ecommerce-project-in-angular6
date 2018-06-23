@@ -1,46 +1,48 @@
+<a class="btn btn-primary" routerLink="/admin/products/new">
 
 
-
-<a class="btn btn-primary" routerLink="/admin/products/new">New Product</a>
+    New Product</a>
 
 <div class="col-lg-12" style="margin-top:50px;">
     <table class="table table-striped" [mfData]="products" #mf="mfDataTable" [mfRowsOnPage]="3">
         <thead>
-        <tr>
-            <th style="width: 20%">
-                <mfDefaultSorter by="name">Pic</mfDefaultSorter>
-            </th>
-            <th style="width: 20%">
+            <tr>
+                <th style="width: 20%">
+                    <mfDefaultSorter by="name">Pic</mfDefaultSorter>
+                </th>
+                <th style="width: 20%">
                     <mfDefaultSorter by="name">Name</mfDefaultSorter>
                 </th>
-            <th style="width: 20%">
-                <mfDefaultSorter by="email">Cost</mfDefaultSorter>
-            </th>
-            <th style="width: 20%">
-                <mfDefaultSorter by="age">Category</mfDefaultSorter>
-            </th>
-            <th style="width: 20%">
-                <mfDefaultSorter by="city">Action</mfDefaultSorter>
-            </th>
-        </tr>
+                <th style="width: 20%">
+                    <mfDefaultSorter by="email">Cost</mfDefaultSorter>
+                </th>
+                <th style="width: 20%">
+                    <mfDefaultSorter by="age">Category</mfDefaultSorter>
+                </th>
+                <th style="width: 20%">
+                    <mfDefaultSorter by="city">Action</mfDefaultSorter>
+                </th>
+            </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of mf.data">
-            <td><img src="{{item.data.url}}" width=100 height=100></td>
-            <td>{{item.data.title}}</td>
-            <td>{{item.data.cost | currency : 'USD'}}</td>
-            <td class="text-right">{{item.data.category}}</td>
-            <td>
-                <a [routerLink]="['/admin/products/edit/',item.key]">Edit</a>
-            </td>
-        </tr>
+            <tr *ngFor="let item of mf.data">
+                <td>
+                    <img src="{{item.data.url}}" width=100 height=100>
+                </td>
+                <td>{{item.data.title}}</td>
+                <td>{{item.data.cost | currency : 'USD'}}</td>
+                <td class="text-right">{{item.data.category}}</td>
+                <td>
+                    <a [routerLink]="['/admin/products/edit/',item.key]">Edit</a>
+                </td>
+            </tr>
         </tbody>
         <tfoot>
-        <tr>
-            <td colspan="4">
-                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-            </td>
-        </tr>
+            <tr>
+                <td colspan="4">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                </td>
+            </tr>
         </tfoot>
     </table>
 </div>
