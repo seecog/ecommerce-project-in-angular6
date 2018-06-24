@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
@@ -15,18 +15,19 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule, Route } from '@angular/router';
 import { OrderSucessComponent } from './order-sucess/order-sucess.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import {HttpModule} from '@angular/http';
+import { HttpModule } from '@angular/http';
 //firebase start
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
-import { AngularFireDatabaseModule} from 'angularfire2/database';
-import {AngularFirestoreModule} from 'angularfire2/firestore';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment.prod';
 import { ProductFormComponent } from './admin/admin-products/product-form/product-form.component';
 import { ProductService } from './providers/product.service';
-import {DataTableModule} from "angular-6-datatable";
+import { DataTableModule } from "angular-6-datatable";
 import { CategoryService } from './providers/category.service';
+import { CategoryListComponent } from './products/category-list/category-list.component';
 //firebase end
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CategoryService } from './providers/category.service';
     LoginComponent,
     OrderSucessComponent,
     NavBarComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    CategoryListComponent
   ],
   imports: [
     BrowserModule,
@@ -51,10 +53,12 @@ import { CategoryService } from './providers/category.service';
     FormsModule,
     ReactiveFormsModule,
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot([{ path: '', redirectTo: '/home', pathMatch: 'full' },
+    RouterModule.forRoot([
+    //{ path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
-    { path: 'products', component: ProductsComponent },
+    { path: '', component: ProductsComponent },
     { path: 'shopping-cart', component: ShoppingCartComponent },
     { path: 'checkout', component: CheckOutComponent },
     { path: 'order-success', component: OrderSucessComponent },
@@ -62,13 +66,13 @@ import { CategoryService } from './providers/category.service';
     { path: 'admin/products/edit/:id', component: ProductFormComponent },
     { path: 'admin/products/new', component: ProductFormComponent },
     { path: 'admin/products', component: AdminProductsComponent },
-    
+
     { path: 'admin/admin-orders', component: AdminOrderComponent },
     { path: 'login', component: LoginComponent }]),
-    AngularFireModule.initializeApp(environment.firebase ,'bshop'),
+    AngularFireModule.initializeApp(environment.firebase, 'bshop'),
     AngularFireAuthModule
   ],
-  providers: [ProductService,CategoryService],
+  providers: [ProductService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
