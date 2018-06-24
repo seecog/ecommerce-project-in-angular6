@@ -19,9 +19,7 @@ export class ProductsComponent implements OnInit {
     this.route.queryParamMap.subscribe(function (x) {
       console.log('The query param is ', x.get('category'));
     })
-
   }
-
 
   ngOnInit() {
     this.getCategories();
