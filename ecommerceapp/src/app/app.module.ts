@@ -26,7 +26,7 @@ import { environment } from '../environments/environment.prod';
 import { ProductFormComponent } from './admin/admin-products/product-form/product-form.component';
 import { ProductService } from './providers/product.service';
 import {DataTableModule} from "angular-6-datatable";
-import { CategoryListComponent } from './products/category-list/category-list.component';
+import { CategoryService } from './providers/category.service';
 //firebase end
 @NgModule({
   declarations: [
@@ -42,8 +42,7 @@ import { CategoryListComponent } from './products/category-list/category-list.co
     LoginComponent,
     OrderSucessComponent,
     NavBarComponent,
-    ProductFormComponent,
-    CategoryListComponent
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -52,18 +51,14 @@ import { CategoryListComponent } from './products/category-list/category-list.co
     FormsModule,
     ReactiveFormsModule,
     AngularFirestoreModule,
-    AngularFireDatabaseModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(
-      [
-        
+    RouterModule.forRoot([{ path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
-    { path: '', component: ProductsComponent },
+    { path: 'products', component: ProductsComponent },
     { path: 'shopping-cart', component: ShoppingCartComponent },
     { path: 'checkout', component: CheckOutComponent },
     { path: 'order-success', component: OrderSucessComponent },
     { path: 'my-orders', component: MyOrdersComponent },
-    
     { path: 'admin/products/edit/:id', component: ProductFormComponent },
     { path: 'admin/products/new', component: ProductFormComponent },
     { path: 'admin/products', component: AdminProductsComponent },
@@ -73,7 +68,7 @@ import { CategoryListComponent } from './products/category-list/category-list.co
     AngularFireModule.initializeApp(environment.firebase ,'bshop'),
     AngularFireAuthModule
   ],
-  providers: [ProductService],
+  providers: [ProductService,CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

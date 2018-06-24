@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm, FormGroup } from '@angular/forms'
+import { NgForm, FormGroup } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import {Validators,FormControl} from '@angular/forms';
@@ -117,6 +117,7 @@ updateProduct(){
             console.log("Record updated")
           }
         )
+        console.log(this.categories);
       }
 
 }
