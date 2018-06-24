@@ -1,18 +1,14 @@
-
-
 <div class="row">
-<div class="col-lg-3">
+  <div class="col-lg-3">
+    <app-category-list [categories]="categories"></app-category-list>
+  </div>
+  <div class="col">
+    <div class="row">
 
-<app-category-list [categories]="categories"></app-category-list>
+      <div *ngFor="let x of tempProducts;let i = index;">
+        <div class="col">
 
-</div>
-<div class="col">
-<div class="row">
-
-    <div *ngFor="let x of tempProducts;let i = index;">
-    <div class="col" >
-  
-        <div class="card" style="width: 15rem;">
+          <div class="card" style="width: 15rem;">
             <img class="card-img-top" width=150 height=150 src="{{x.data.url}}" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">{{x.data.title}}</h5>
@@ -21,16 +17,13 @@
               </p>
             </div>
             <div class="card-footer">
-                <button (click)="addToCart()" class="btn btn-primary btn-block">Add To cart</button>
+              <button (click)="addToCart()" class="btn btn-primary btn-block">Add To cart</button>
             </div>
           </div>
-  
+        </div>
+        <div *ngIf="(i+1)%2==0" class="w-100"></div>
+      </div>
     </div>
-    <div *ngIf="(i+1)%2==0" class="w-100"></div>
   </div>
-  </div>
-</div>
 
 </div>
-
-
