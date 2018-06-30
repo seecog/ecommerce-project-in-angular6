@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { CategoryService } from '../providers/category.service';
+import { CartService } from '../providers/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -15,7 +16,7 @@ export class ProductsComponent implements OnInit {
   private tempProducts: any[] = [];
   private categories: any[] = [];
 
-  constructor(private db: AngularFireDatabase, private routeParam: ActivatedRoute, private productService: ProductService, private categoryService: CategoryService, private route: ActivatedRoute) {
+  constructor(private db: AngularFireDatabase,private cartService : CartService, private routeParam: ActivatedRoute, private productService: ProductService, private categoryService: CategoryService, private route: ActivatedRoute) {
     this.route.queryParamMap.subscribe(function (x) {
       console.log('The query param is ', x.get('category'));
     })
@@ -57,17 +58,18 @@ export class ProductsComponent implements OnInit {
     )
   }
 
-  addToCart() {
-    let cartId = localStorage.getItem('cartId');
-    if (!cartId) {
-      //create cart in firebase
-      let cartInfo = this.db.list('/shopping-carts').push({ createDate: new Date().getTime() });
-      console.log('The cart info is ', cartInfo)
-      //add product to cart
-    }
-    else {
-      //add product to cart
-    }
+  getCartRef(product){
+//     this.cartService.getCart(product.key).then(function(res){
+// console.log('The net response is ',res)
+//     })
+//     .catch(function(err){
+//     console.log('The error is ',err)
+//     })
+    return 1;
+  }
+
+  addToCart(product) {
+    this.cartService.addTocart(product);
   }
   getCategories() {
     this.categoryService.getCategories().subscribe(

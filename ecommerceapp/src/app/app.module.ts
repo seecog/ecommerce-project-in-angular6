@@ -28,6 +28,7 @@ import { ProductService } from './providers/product.service';
 import { DataTableModule } from "angular-6-datatable";
 import { CategoryService } from './providers/category.service';
 import { CategoryListComponent } from './products/category-list/category-list.component';
+import { CartService } from './providers/cart.service';
 //firebase end
 @NgModule({
   declarations: [
@@ -72,7 +73,7 @@ import { CategoryListComponent } from './products/category-list/category-list.co
     AngularFireModule.initializeApp(environment.firebase, 'bshop'),
     AngularFireAuthModule
   ],
-  providers: [ProductService, CategoryService],
+  providers: [ProductService,CartService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
