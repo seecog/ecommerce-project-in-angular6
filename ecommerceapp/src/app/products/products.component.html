@@ -17,8 +17,18 @@
               </p>
             </div>
             <div class="card-footer">
-              <button (click)="addToCart(x)" class="btn btn-primary btn-block">Add To cart</button>
-           <div>{{getCartRef(x)}}</div>
+              <button *ngIf="!cart[x.key]" (click)="addToCart(x)" class="btn btn-primary btn-block">Add To cart</button>
+              <div *ngIf="cart[x.key]">
+                <div class="col-lg-2">
+                  <button class="btn btn-sm btn-block">-</button>
+                </div>
+                <div class="col-lg-8">
+                  <div>{{cart[x.key].quantity}}</div>
+                </div>
+                <div class="col-lg-2">
+                <button class="btn btn-sm btn-block">+</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -26,5 +36,6 @@
       </div>
     </div>
   </div>
+  [{{items | async}}]
 
 </div>

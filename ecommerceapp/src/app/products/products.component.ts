@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { CategoryService } from '../providers/category.service';
 import { CartService } from '../providers/cart.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -15,14 +16,32 @@ export class ProductsComponent implements OnInit {
   private products: any[] = [];
   private tempProducts: any[] = [];
   private categories: any[] = [];
-
-  constructor(private db: AngularFireDatabase,private cartService : CartService, private routeParam: ActivatedRoute, private productService: ProductService, private categoryService: CategoryService, private route: ActivatedRoute) {
+  items: Observable<any[]>;
+  private cart : any;
+  constructor(private http : Http,private db: AngularFireDatabase,private cartService : CartService, private routeParam: ActivatedRoute, private productService: ProductService, private categoryService: CategoryService, private route: ActivatedRoute) {
     this.route.queryParamMap.subscribe(function (x) {
       console.log('The query param is ', x.get('category'));
     })
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    // let cartRecord=await this.cartService.getCartRecord();
+    // console.log('the cart record is ',cartRecord)
+
+    let cartId = localStorage.getItem('cartId');
+    console.log('The cart id is -->',cartId)
+    this.items = this.db.list('/shopping-carts/').valueChanges();
+    this.http.get('https://bshop-4d7cd.firebaseio.com/shopping-carts/'+cartId+'.json').subscribe(
+      (res)=>{
+        console.log('The response is --<>',res.json().items);
+        this.cart=res.json().items;
+      },
+      (err)=>{
+        console.log('The error is ',err)
+      }
+    )
+ 
+    
     this.getCategories();
     this.productService.getAll().subscribe(
       (res) => {
@@ -36,7 +55,7 @@ export class ProductsComponent implements OnInit {
         this.routeParam.queryParamMap.subscribe(
           (res) => {
             this.tempProducts = this.products.filter(product => {
-              console.log('The param is ', res.get('category'), product)
+             // console.log('The param is ', res.get('category'), product)
 
               return res.get('category') === product.data.category;
             })
@@ -65,6 +84,8 @@ export class ProductsComponent implements OnInit {
 //     .catch(function(err){
 //     console.log('The error is ',err)
 //     })
+let cartRecord = this.cartService.getCartRecord();
+    console.log('The cart record is ', cartRecord)
     return 1;
   }
 

@@ -29,6 +29,13 @@ export class CartService {
         return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
     }
 
+    async getCartRecord(){
+      let cartId = await this.getOrCreateCartId();
+
+        const itemsRef = this.db.list('/shopping-carts/' + cartId);
+        return itemsRef;
+    }
+
     async addTocart(product) {
         let cartId = await this.getOrCreateCartId();
         let cartRef = await this.getCart(product.key); 
